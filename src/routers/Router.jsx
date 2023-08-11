@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useReducer } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 import Home from '../pages/home/Home'
 import { initialUser, userReducer } from '../reducers/useReducer';
 import Login from '../pages/login/Login';
@@ -40,15 +40,15 @@ const Router = () => {
         <Routes>
         <Route path='/'>
                 <Route element={<PublicRouter isAutenticated={userLogin.isAutenticated}/>}>
-                    <Route index element={<Login/>}/>
+                    <Route path='login' element={<Login/>}/>
                 </Route>
 
                 <Route element={<PrivateRouter isAutenticated={userLogin.isAutenticated}/>}>
-                    <Route element={<Layout/>}>
+                    {/* <Route element={<Layout/>}> */}
                         <Route index element={<Home/>}/>
                         <Route path='profile' element={<Profile/>}/>
                         <Route path='publication' element={<Publication/>}/>
-                    </Route>
+                    {/* </Route> */}
                 </Route>
             </Route>
         </Routes>

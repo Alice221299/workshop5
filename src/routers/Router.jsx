@@ -25,6 +25,7 @@ const Router = () => {
                 isAutenticated: true,
                 user: user
             }})
+            console.log(user)
         }
     }, [])
 

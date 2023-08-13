@@ -9,6 +9,7 @@ import cardImage from "/cardImage.png";
 import text from "/text.svg";
 import share from "/share.svg";
 import savehome from "/savehome.svg";
+import Carrusel from "../../components/carrusel/Carrusel";
 const Home = () => {
   const navigate = useNavigate();
 
@@ -31,7 +32,7 @@ const Home = () => {
         </figure>
       </div>
 
-      <div>AQUI VA EL CARRUSEL</div>
+      <Carrusel/>
 
       <section className="containerHome__card">
         <div className="containerHome__card-prof">
@@ -62,10 +63,14 @@ const Home = () => {
             <img src={savehome} alt="" />
           </figure>
         </div>
+        <div className="containPublication">
+          <span className="username">Jennie Kim</span>
+          <p className="caption">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam ex suscipit iusto iste numquam ducimus provident laborum incidunt, alias corrupti distinctio hic quod commodi voluptate? Magnam voluptas omnis labore beatae.</p>
+        </div>
       </section>
 
-      {/* <button onClick={handleClick1}>Profile</button>
-      <button onClick={handleClick2}>Publication</button> */}
+      <button onClick={handleClick1}>Profile</button>
+      <button onClick={handleClick2}>Publication</button>
     </div>
   );
 };

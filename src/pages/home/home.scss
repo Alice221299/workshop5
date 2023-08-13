@@ -91,5 +91,19 @@
         }
       }
     }
+    .containPublication {
+      margin-top: auto; 
+      padding: 10px 0; 
+  
+      .username {
+        font-weight: bold;
+      }
+  
+      .caption {
+        overflow: hidden;
+        text-overflow: ellipsis; /* Agrega ... al final si el texto se desborda */
+        white-space: nowrap; 
+      }
+    }
   }
 }

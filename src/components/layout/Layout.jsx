@@ -1,12 +1,19 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import Nav from '../nav/Nav'
 
 const Layout = () => {
+  const location = useLocation();
+  const path = location.pathname;
   return (
     <div>
         <Outlet/>
-        <Nav/>
+        {(path === "/" || path === "/publication") ? (
+     <Nav/>
+     ) : (
+      ""
+    )}
+        
     </div>
   )
 }

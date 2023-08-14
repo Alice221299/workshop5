@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./home.scss";
 import logof from "/logof.png";
 import likehome from "/likehome.svg";
@@ -10,9 +10,9 @@ import text from "/text.svg";
 import share from "/share.svg";
 import savehome from "/savehome.svg";
 import Carrusel from "../../components/carrusel/Carrusel";
+import Nav from "../../components/nav/Nav";
 const Home = () => {
   const navigate = useNavigate();
-
   const handleClick1 = () => {
     navigate("/profile");
   };
@@ -20,6 +20,8 @@ const Home = () => {
   const handleClick2 = () => {
     navigate("/publication");
   };
+ 
+
   return (
     <div className="containerHome">
       <div className="containerHome__icons">
@@ -33,7 +35,8 @@ const Home = () => {
       </div>
 
       <Carrusel/>
-
+      <button onClick={handleClick1}>Profile</button>
+      <button onClick={handleClick2}>Publication</button>
       <section className="containerHome__card">
         <div className="containerHome__card-prof">
           <figure className="contain">
@@ -69,8 +72,8 @@ const Home = () => {
         </div>
       </section>
 
-      <button onClick={handleClick1}>Profile</button>
-      <button onClick={handleClick2}>Publication</button>
+  {/* <Nav/> */}
+      
     </div>
   );
 };

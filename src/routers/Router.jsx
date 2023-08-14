@@ -47,14 +47,14 @@ const Router = () => {
                 </Route>
 
                 <Route element={<PrivateRouter isAutenticated={userLogin.isAutenticated}/>}>
-                    {/* <Route element={<Layout/>}> */}
+                    <Route element={<Layout/>}>
                         <Route index element={<Home/>}/>
                         <Route path='profile' element={<Profile/>}>
                             <Route path='photos' element={<ProfilePhotos/>}/>
                             <Route path='album' element={<ProfileAlbum/>}/>
                         </Route>
                         <Route path='publication' element={<Publication/>}/>
-                    {/* </Route> */}
+                    </Route>
                 </Route>
             </Route>
         </Routes>

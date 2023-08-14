@@ -15,7 +15,7 @@ import { getComment, saveComment } from "../../services/commentService";
 import { getAllUsers } from "../../services/usersAll";
 
 const Publication = () => {
-  const navigate = useNavigate();
+   const navigate = useNavigate();
   const {
     user: { userLogin },
   } = useContext(AppContext);

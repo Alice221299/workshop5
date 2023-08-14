@@ -9,6 +9,8 @@ import Publication from '../pages/publication/Publication';
 import { getSession } from '../services/sessionService';
 import PublicRouter from './PublicRouter';
 import PrivateRouter from './PrivateRouter';
+import ProfilePhotos from '../components/profilePhotos/ProfilePhotos';
+import ProfileAlbum from '../components/profileAlbum/ProfileAlbum';
 
 export const AppContext = createContext({});
 
@@ -47,7 +49,10 @@ const Router = () => {
                 <Route element={<PrivateRouter isAutenticated={userLogin.isAutenticated}/>}>
                     {/* <Route element={<Layout/>}> */}
                         <Route index element={<Home/>}/>
-                        <Route path='profile' element={<Profile/>}/>
+                        <Route path='profile' element={<Profile/>}>
+                            <Route path='photos' element={<ProfilePhotos/>}/>
+                            <Route path='album' element={<ProfileAlbum/>}/>
+                        </Route>
                         <Route path='publication' element={<Publication/>}/>
                     {/* </Route> */}
                 </Route>

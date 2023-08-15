@@ -40,8 +40,8 @@ const Login = () => {
     }
 
   return (
-    <main className='d-flex justify-content-center align-items-center vw-100 vh-100'>
-        <form className='card p-5 bg-warning-subtle' onSubmit={handleSubmit(onSubmit)}>
+    <main className='d-flex justify-content-center align-items-center vw-100 vh-100 login'>
+        <form className='card p-5 form-login' onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-3">
             <label  className="form-label"><span >Email</span>
             <input type="email" className="form-control mt-2"  placeholder="Escriba su correo" {...register('email', {required: true})}/>
@@ -52,10 +52,11 @@ const Login = () => {
             <input type="password" className="form-control mt-2"  placeholder="Escriba su contraseña" {...register('password', {required: true})}/>
             </label>
         </div>
-        <button type="submit" className='btn btn-success'>Registrarse</button>
+        <button type="submit" className='btn login-button'>Registrarse</button>
         </form>
     </main>
   )
 }
 
 export default Login
+

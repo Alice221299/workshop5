@@ -31,11 +31,21 @@ const Router = () => {
         }
     }, [])
 
+    const handleLogout = () => {
+        sessionStorage.clear();
+        userDispatch({
+            type: "logout",
+            payload: {
+                isAutenticated: false,
+                user: initialUser
+            }})
+      };
+
     const [userLogin, userDispatch] = useReducer(userReducer, initialUser)
     const globalState = {user: {
         userLogin,
         userDispatch
-    }}
+    }, handleLogout}
 
   return (
     <AppContext.Provider value={globalState}>

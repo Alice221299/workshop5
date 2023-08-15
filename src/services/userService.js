@@ -12,3 +12,13 @@ export const getOneUser = async (email, password) => {
    
 }
 
+export const getUser = async (userId) => {
+    try {
+        const { data } = await axios.get(`${endpoints.urlUsers}?id=${userId}`);
+        return data
+    } catch (error) {
+        console.log(error);
+        return null
+    }
+}
+

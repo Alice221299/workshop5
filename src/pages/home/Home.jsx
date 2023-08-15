@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./home.scss";
 import logof from "/logof.png";
@@ -11,8 +11,38 @@ import share from "/share.svg";
 import savehome from "/savehome.svg";
 import Carrusel from "../../components/carrusel/Carrusel";
 import Nav from "../../components/nav/Nav";
+import getPosts, { getPostUser } from "../../services/postsService";
+import CardPost from "../../components/cardPost/CardPost";
 const Home = () => {
   const navigate = useNavigate();
+  const [listPost, setListPost] = useState();
+
+  useEffect(() => {
+    // post();
+    postUser()
+  }, []);
+
+  // const post = async () => {
+  //   try {
+  //     const response = await getPosts();
+  //     setListPost(response);
+  //   } catch (error) {
+  //     console.log(error);
+  //     return [];
+  //   }
+  // };
+
+  const postUser = async () => {
+    try {
+      const response = await getPostUser();
+      console.log(response)
+      setListPost(response)
+    } catch (error) {
+      console.log(error);
+      return []
+    }
+  }
+
   const handleClick1 = () => {
     navigate("/profile");
   };
@@ -20,7 +50,6 @@ const Home = () => {
   const handleClick2 = () => {
     navigate("/publication");
   };
- 
 
   return (
     <div className="containerHome">
@@ -34,46 +63,29 @@ const Home = () => {
         </figure>
       </div>
 
-      <Carrusel/>
+      <Carrusel />
       <button onClick={handleClick1}>Profile</button>
       <button onClick={handleClick2}>Publication</button>
-      <section className="containerHome__card">
-        <div className="containerHome__card-prof">
-          <figure className="contain">
-            <img className="usuaria" src={cart} alt="" />
-          </figure>
-          <span>Jennie Kim</span>
+      <div className="container-post">
+      {/* {listPost?.map((info) => (
+        <div key={info.id}>
+          <CardPost info={info}/>
         </div>
-        <figure className="imageCard">
-          <img className="usered" src={cardImage} alt="" />
-        </figure>
-        <div className="containerHome__card-likes">
-          <figure className="down">
-            <div className="reaction">
-              <img src={likehome} alt="" />
-              <span>14k</span>
-            </div>
-            <div className="reaction">
-              <img src={text} alt="" />
-              <span>14k</span>
-            </div>
-            <div className="reaction">
-              <img src={share} alt="" />
-              <span>14k</span>
-            </div>
-          </figure>
-          <figure>
-            <img src={savehome} alt="" />
-          </figure>
+        
+      ))} */}
+      {
+        listPost?.map((post) => (
+          post?.posts.length > 0 && (
+            <div key={post.id}>
+          <CardPost info={post}/>
         </div>
-        <div className="containPublication">
-          <span className="username">Jennie Kim</span>
-          <p className="caption">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam ex suscipit iusto iste numquam ducimus provident laborum incidunt, alias corrupti distinctio hic quod commodi voluptate? Magnam voluptas omnis labore beatae.</p>
-        </div>
-      </section>
-
-  {/* <Nav/> */}
+          ) 
+        ))
+      }
+      </div>
       
+
+      {/* <Nav/> */}
     </div>
   );
 };

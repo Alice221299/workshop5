@@ -1,36 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./home.scss";
 import logof from "/logof.png";
 import likehome from "/likehome.svg";
 import comenthome from "/comenthome.svg";
-import cart from "/perfil.png";
-import cardImage from "/cardImage.png";
-import text from "/text.svg";
-import share from "/share.svg";
-import savehome from "/savehome.svg";
 import Carrusel from "../../components/carrusel/Carrusel";
-import Nav from "../../components/nav/Nav";
-import getPosts, { getPostUser } from "../../services/postsService";
+import { getPostUser } from "../../services/postsService";
 import CardPost from "../../components/cardPost/CardPost";
 const Home = () => {
   const navigate = useNavigate();
   const [listPost, setListPost] = useState();
 
   useEffect(() => {
-    // post();
     postUser()
   }, []);
-
-  // const post = async () => {
-  //   try {
-  //     const response = await getPosts();
-  //     setListPost(response);
-  //   } catch (error) {
-  //     console.log(error);
-  //     return [];
-  //   }
-  // };
 
   const postUser = async () => {
     try {
@@ -67,12 +50,6 @@ const Home = () => {
       <button onClick={handleClick1}>Profile</button>
       <button onClick={handleClick2}>Publication</button>
       <div className="container-post">
-      {/* {listPost?.map((info) => (
-        <div key={info.id}>
-          <CardPost info={info}/>
-        </div>
-        
-      ))} */}
       {
         listPost?.map((post) => (
           post?.posts.length > 0 && (
@@ -83,9 +60,6 @@ const Home = () => {
         ))
       }
       </div>
-      
-
-      {/* <Nav/> */}
     </div>
   );
 };

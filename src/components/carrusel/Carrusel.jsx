@@ -2,19 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/scss";
 import "swiper/css/effect-coverflow";
-
-// import { EffectCoverflow, Navigation, Autoplay } from "swiper/modules";
-import carrusel1 from "/carrusel1.png";
-import carrusel2 from "/carrusel2.png";
-import carrusel3 from "/carrusel3.png";
 import "./carrusel.scss";
 import { getAllUsers } from "../../services/usersAll";
-import useSessionStorage from "../../hooks/useSessionStorage";
+import { AppContext } from "../../routers/Router";
 const Carrusel = () => {
+
+  const {user: {userLogin}} = useContext(AppContext)
   const [listUsers, setListUsers] = useState([]);
-  const { getInfo } = useSessionStorage();
-  const key = "user";
-  const userLogeado = getInfo(key);
 
   useEffect(() => {
     users();
@@ -23,7 +17,7 @@ const Carrusel = () => {
   const users = async () => {
     try {
       const response = await getAllUsers();
-      const filter = response.filter(user => user.id !== userLogeado.id);
+      const filter = response.filter(user => user.id !== userLogin.id);
       setListUsers(filter);
     } catch (error) {
       console.log(error);
@@ -54,9 +48,9 @@ const Carrusel = () => {
         initialSlide={2}
         className="swiper_container"
       >
-        <SwiperSlide className="swiper-slide" key={userLogeado?.id}>
-            <img className="carrusel-image" src={userLogeado?.avatar} alt="" />
-            <span>{userLogeado?.name}</span>
+        <SwiperSlide className="swiper-slide" key={userLogin?.id}>
+            <img className="carrusel-image" src={userLogin?.avatar} alt="" />
+            <span>{userLogin?.name}</span>
           </SwiperSlide>
         {listUsers?.map((data) => (
           <SwiperSlide className="swiper-slide" key={data?.id}>

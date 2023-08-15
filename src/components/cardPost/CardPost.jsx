@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import text from "/text.svg";
 import share from "/share.svg";
 import savehome from "/savehome.svg";

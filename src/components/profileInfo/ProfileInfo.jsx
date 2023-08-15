@@ -8,12 +8,12 @@ import { useNavigate } from 'react-router-dom'
 
 const ProfileInfo = () => {
     const [options, setOptions] = useState(false)
-    const {globalState} = useContext(AppContext)
+    const {handleLogout} = useContext(AppContext)
     const user = getSession()
     const navigate = useNavigate()
 
     useEffect(() => {
-        console.log(globalState, user);
+        console.log(user);
     }, [])
 
     const onClickBack = () => {
@@ -27,7 +27,7 @@ const ProfileInfo = () => {
             {options && 
                 <div className='profile-options'>
                     <p>Edit profile</p>
-                    <p>Log Out</p>
+                    <p onClick={handleLogout}>Log Out</p>
                 </div>}
             <img className='profile-avatar' src={user.avatar} alt={user.name} />
         </div>

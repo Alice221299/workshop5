@@ -26,10 +26,6 @@ const Home = () => {
     }
   }
 
-  const handleClick1 = () => {
-    navigate("/profile");
-  };
-
   return (
     <div className="containerHome">
       <div className="containerHome__icons">
@@ -43,7 +39,6 @@ const Home = () => {
       </div>
 
       <Carrusel />
-      <button onClick={handleClick1}>Profile</button>
       <div className="container-post">
       {
         listPost?.map((post) => (

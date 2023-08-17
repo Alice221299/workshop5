@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './nav.scss';
 import home from '/house.svg';
 import search from '/search.svg';
@@ -9,6 +9,11 @@ import user from '/user.svg';
 const Nav = () => {
   const location = useLocation();
   const path = location.pathname;
+  const navigate = useNavigate();
+
+  const handleProfile = () => {
+    navigate('/profile')
+  }
  
   return (
     <>
@@ -25,7 +30,7 @@ const Nav = () => {
         <img className='icon' src={search} alt="" />
         <img className='more' src={more} alt="" />
         <img className='icon' src={bell} alt="" />
-        <img className='icon' src={user} alt="" />
+        <img className='icon' src={user} alt="" onClick={handleProfile}/>
       </figure>
     </div>
     

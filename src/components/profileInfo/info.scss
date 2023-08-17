@@ -24,7 +24,90 @@
             right: 2rem;
             box-shadow: 19px 22px 15px -7px rgba(0,0,0,0.2);
             border-radius: 20px;
-        }
+            p:hover {
+                box-shadow:  7px 7px 14px #d66361,
+             -7px -7px 14px #ff8987;
+                cursor: pointer;
+                border-radius: 5px;
+            } }
+            .new-form--container {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 100vw;
+                height: fit-content;
+                background-color: rgba(23, 26, 31, 0.4);
+                z-index: 30;
+                .new-form {
+                    background-color: $white;
+                    margin: 30% 10%;
+                    padding: 2rem 1.5rem;
+                    position: relative;
+                    border-radius: 10px;
+                    display: flex;
+                    flex-direction: column;
+                    // align-items: baseline;
+                    // justify-content: baseline;
+                    // width: fit-content;
+                    // height: fit-content;
+                    // border-width: none;
+                    // border-style: none;
+                    // border-image: none;
+                    .form-close {
+                        position: absolute;
+                        top: -20px;
+                        right: -20px;
+                        background-color: $light-pink;
+                        border-radius: 50%;
+                        padding: 10px 12px;
+                        height: fit-content;
+                    }
+                    h2 {
+                        font-size: 2rem;
+                        text-align: center;
+                        // margin-bottom: 10px;
+                        color: $red;
+                    }
+                        label {
+                            color: $red;
+                            margin: 20px 10px 0;
+                            font-weight: 700;
+                        }
+                        input {
+                            border: none;
+                            background-color: $white;
+                            border-bottom: 1px solid $light-pink;
+                            color: $red;
+                            padding: 5px 0;
+                            margin: 0 20px;
+                            opacity: 80%;
+                            width: 90%;
+                            border-radius: 0;
+                        }
+                        input:focus{
+                            outline: none;
+                            border-bottom: $light-pink 2px solid;
+                            color: $red;
+                        }
+                        button {
+                            border: none;
+                            background-color: $light-pink;
+                            color: $white;
+                            border-radius: 5px;
+                            padding: 12px 30px;
+                            font-weight: 500;
+                            font-size: 16px;
+                            margin-top: 40px;
+                            box-shadow: 0px 5px 18px -3px rgba(255,118,116, 0.3);
+                        }
+                        button:hover {
+                            box-shadow:  7px 7px 14px #d0d0d0,
+                            -7px -7px 14px #ffffff;
+                            cursor: pointer;
+                        }
+                    }
+                }
+       
         .profile-avatar {
         position: absolute;
         bottom: -35px;

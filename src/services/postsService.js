@@ -25,11 +25,13 @@ export const getPostUser = async () => {
     }
 }
 
-export const editPost = async () => {
+export const editPost = async (newPost, postId) => {
     try {
+        const response = await axios.patch(`${endpoints.urlPosts}/${postId}`, newPost);
+        return response;
         
     } catch (error) {
         console.log(error);
-        return []
+        return null
     }
 }

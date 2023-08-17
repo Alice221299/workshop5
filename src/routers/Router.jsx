@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useReducer } from 'react'
+import React, { createContext, useEffect, useReducer, useState } from 'react'
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 import Home from '../pages/home/Home'
 import { initialUser, userReducer } from '../reducers/useReducer';
@@ -11,10 +11,13 @@ import PublicRouter from './PublicRouter';
 import PrivateRouter from './PrivateRouter';
 import ProfilePhotos from '../components/profilePhotos/ProfilePhotos';
 import ProfileAlbum from '../components/profileAlbum/ProfileAlbum';
+import ProfileTags from '../components/profileTags/ProfileTags';
 
 export const AppContext = createContext({});
 
 const Router = () => {
+
+    const [userPosts, setUserPosts] = useState(null)
 
     useEffect(() => {
         const user = getSession()
@@ -29,11 +32,21 @@ const Router = () => {
         }
     }, [])
 
+    const handleLogout = () => {
+        sessionStorage.clear();
+        userDispatch({
+            type: "logout",
+            payload: {
+                isAutenticated: false,
+                user: initialUser
+            }})
+      };
+
     const [userLogin, userDispatch] = useReducer(userReducer, initialUser)
     const globalState = {user: {
         userLogin,
         userDispatch
-    }}
+    }, handleLogout, userPosts, setUserPosts}
 
   return (
     <AppContext.Provider value={globalState}>
@@ -50,6 +63,7 @@ const Router = () => {
                         <Route path='profile' element={<Profile/>}>
                             <Route path='photos' element={<ProfilePhotos/>}/>
                             <Route path='album' element={<ProfileAlbum/>}/>
+                            <Route path='tags' element={<ProfileTags/>}/>
                         </Route>
                         <Route path='publication' element={<Publication/>}/>
                     </Route>

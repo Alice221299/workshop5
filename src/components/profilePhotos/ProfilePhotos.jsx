@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import "./photos.scss"
+import { AppContext } from '../../routers/Router'
 
 const ProfilePhotos = () => {
+
+  const {userPosts} = useContext(AppContext)
   return (
     <div className='pictures-container'>
-        <figure className='pictures-element'>
-            <img  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="" />
+      {userPosts && userPosts.posts.length > 0 && userPosts.posts.map((post) => (
+        <figure className='pictures-element' key={post.id}>
+            <img  src={post.image} alt="Image" />
         </figure>
+      ))
+      
+      }
+        
     </div>
   )
 }

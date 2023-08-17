@@ -12,13 +12,12 @@ const Carrusel = () => {
 
   useEffect(() => {
     users();
-    console.log(userLogin)
   }, []);
 
   const users = async () => {
     try {
       const response = await getAllUsers();
-      const filter = response.filter(user => user.id !== userLogin.id);
+      const filter = response.filter(user => user.id !== userLogin.user.id);
       setListUsers(filter);
     } catch (error) {
       console.log(error);
@@ -49,9 +48,9 @@ const Carrusel = () => {
         initialSlide={2}
         className="swiper_container"
       >
-        <SwiperSlide className="swiper-slide" key={userLogin?.id}>
-            <img className="carrusel-image" src={userLogin?.avatar} alt="" />
-            <span>{userLogin?.name}</span>
+        <SwiperSlide className="swiper-slide" key={userLogin?.user.id}>
+            <img className="carrusel-image" src={userLogin?.user.avatar} alt="" />
+            <span>Your Story</span>
           </SwiperSlide>
         {listUsers?.map((data) => (
           <SwiperSlide className="swiper-slide" key={data?.id}>

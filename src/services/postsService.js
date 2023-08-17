@@ -24,3 +24,12 @@ export const getPostUser = async () => {
         return []
     }
 }
+
+export const editPost = async () => {
+    try {
+        
+    } catch (error) {
+        console.log(error);
+        return []
+    }
+}

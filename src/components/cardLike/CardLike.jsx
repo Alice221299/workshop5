@@ -10,7 +10,7 @@ const CardLike = ({ post }) => {
   const [postLike, setPostLike] = useState(false);
 
   useEffect(() => {
-    validateLike()
+    validateLike();
   }, []);
 
   const validateLike = () => {
@@ -18,11 +18,22 @@ const CardLike = ({ post }) => {
     setPostLike(response);
   };
 
+  const handleSeleccionLikes = (like) => {
+    console.log("entre aca", like);
+    if(like){
+      setPostLike(false);
+    }else{
+      setPostLike(true);
+    }
+  };
+
   return (
     <>
-    {
-        postLike ? <img src={like} alt="" /> : <img src={likehome} alt="" />
-    }
+      {postLike ? (
+        <img src={like} alt="" onClick={() => handleSeleccionLikes(true)} />
+      ) : (
+        <img src={likehome} alt="" onClick={() => handleSeleccionLikes(false)} />
+      )}
       <span>{post.likes.length}</span>
     </>
   );

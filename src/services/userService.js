@@ -12,3 +12,25 @@ export const getOneUser = async (email, password) => {
    
 }
 
+
+
+export const getUser = async (userId) => {
+    try {
+        const { data } = await axios.get(`${endpoints.urlUsers}?id=${userId}`);
+        return data
+    } catch (error) {
+        console.log(error);
+        return null
+    }
+}
+
+export const getUserPost = async (userId) => {
+    try {
+        const {data} = await axios.get(`${endpoints.urlUsers}/${userId}?_embed=posts`)
+        return data;
+    } catch (error) {
+        console.log(error);
+        return null
+    }
+   
+}

@@ -65,7 +65,7 @@ const Router = () => {
                             <Route path='album' element={<ProfileAlbum/>}/>
                             <Route path='tags' element={<ProfileTags/>}/>
                         </Route>
-                        <Route path='publication' element={<Publication/>}/>
+                        <Route path=':idPost' element={<Publication/>}/>
                     </Route>
                 </Route>
             </Route>

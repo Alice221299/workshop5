@@ -3,14 +3,24 @@ import text from "/text.svg";
 import share from "/share.svg";
 import savehome from "/savehome.svg";
 import likehome from "/likehome.svg";
+import { useNavigate } from 'react-router-dom';
 
 const CardPost = ({ info }) => {
+
+  const navigate = useNavigate()
+
+  const handlePublication = (idPost) =>{
+    navigate(`${idPost}`)
+  }
 
   return (
     <>
     {
       info?.posts?.map((date) => (
-        <section className="containerHome__card" key={date.id} >
+        <section 
+        className="containerHome__card" 
+        key={date.id} 
+        onClick={() => handlePublication(date.id) }>
           <div className="containerHome__card-prof">
             <figure className="contain">
               <img className="usuaria" src={info.avatar} alt="" />

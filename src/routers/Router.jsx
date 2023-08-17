@@ -17,7 +17,7 @@ export const AppContext = createContext({});
 
 const Router = () => {
 
-    const [userPosts, setUserPosts] = useState(null)
+    const [posts, setPosts] = useState(null)
 
     useEffect(() => {
         const user = getSession()
@@ -45,7 +45,7 @@ const Router = () => {
     const globalState = {user: {
         userLogin,
         userDispatch
-    }, handleLogout, userPosts, setUserPosts}
+    }, handleLogout, posts, setPosts}
 
   return (
     <AppContext.Provider value={globalState}>

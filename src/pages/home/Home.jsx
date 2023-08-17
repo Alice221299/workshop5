@@ -18,7 +18,6 @@ const Home = () => {
   const postUser = async () => {
     try {
       const response = await getPostUser();
-      console.log(response)
       setListPost(response)
     } catch (error) {
       console.log(error);

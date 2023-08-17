@@ -1,6 +1,10 @@
 @import "/src/assets/styles/reset.scss";
 @import "/src/assets/styles/variables.scss";
 
+.container-post{
+  gap: 8px;
+}
+
 .containerHome {
   background: linear-gradient(
     45deg,
@@ -34,8 +38,9 @@
     width: calc(100% - 20px); /* Restamos 20px para dar espacio a los márgenes */
     margin: 0 auto; /* Centramos horizontalmente */
     padding: 20px; 
-    
+    margin-top: 8px;
     overflow: hidden; 
+
     &-prof {
       display: flex;
       align-items: center;
@@ -59,13 +64,14 @@
     }
     .imageCard {
       margin-bottom: 10px;
-      height: 65vh;
+      height: 280px;
       width: 100%;
 
       .usered {
         width: 100%;
         height: 100%;
         border-radius: 20px;
+        object-fit: cover;
       }
     }
     &-likes {
@@ -100,9 +106,11 @@
       }
   
       .caption {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
         overflow: hidden;
-        text-overflow: ellipsis; /* Agrega ... al final si el texto se desborda */
-        white-space: nowrap; 
+        text-overflow: ellipsis;
       }
     }
   }

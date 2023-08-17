@@ -1,8 +1,13 @@
-import React from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import "./filter.scss"
 
 const ProfileFilter = () => {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    navigate('/profile/photos')
+  }, [])
 
   return (
     <div className='profile-filter'>
@@ -10,7 +15,7 @@ const ProfileFilter = () => {
             <NavLink to='photos' className='profile-link'>Photos</NavLink>
             <NavLink className='profile-link'>Videos</NavLink>
             <NavLink to='album' className='profile-link'>Album</NavLink>
-            <NavLink className='profile-link'>Tag</NavLink>
+            <NavLink to='tags' className='profile-link'>Tag</NavLink>
         </div>
         <Outlet/>
     </div>

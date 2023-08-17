@@ -5,16 +5,23 @@ import points from "/images/points.svg"
 import { AppContext } from '../../routers/Router'
 import { getSession } from '../../services/sessionService'
 import { useNavigate } from 'react-router-dom'
+import { getUserPost } from '../../services/userService'
 
 const ProfileInfo = () => {
     const [options, setOptions] = useState(false)
-    const {handleLogout} = useContext(AppContext)
+    const {handleLogout, userPosts, setUserPosts} = useContext(AppContext)
     const user = getSession()
     const navigate = useNavigate()
 
     useEffect(() => {
-        console.log(user);
+        getPosts()
     }, [])
+
+    const getPosts = async () => {
+        const response = await getUserPost(user.id)
+        setUserPosts(response)
+        console.log(response);
+    }
 
     const onClickBack = () => {
         navigate('/')

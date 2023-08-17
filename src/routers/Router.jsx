@@ -12,6 +12,7 @@ import PrivateRouter from './PrivateRouter';
 import ProfilePhotos from '../components/profilePhotos/ProfilePhotos';
 import ProfileAlbum from '../components/profileAlbum/ProfileAlbum';
 import ProfileTags from '../components/profileTags/ProfileTags';
+import ProfileVideos from '../components/profileVideos/ProfileVideos';
 
 export const AppContext = createContext({});
 
@@ -62,6 +63,7 @@ const Router = () => {
                         <Route index element={<Home/>}/>
                         <Route path='profile' element={<Profile/>}>
                             <Route path='photos' element={<ProfilePhotos/>}/>
+                            <Route path='videos' element={<ProfileVideos/>}/>
                             <Route path='album' element={<ProfileAlbum/>}/>
                             <Route path='tags' element={<ProfileTags/>}/>
                         </Route>

@@ -13,7 +13,7 @@ const ProfileFilter = () => {
     <div className='profile-filter'>
         <div className='profile-navbar'>
             <NavLink to='photos' className='profile-link'>Photos</NavLink>
-            <NavLink className='profile-link'>Videos</NavLink>
+            <NavLink to="videos" className='profile-link'>Videos</NavLink>
             <NavLink to='album' className='profile-link'>Album</NavLink>
             <NavLink to='tags' className='profile-link'>Tag</NavLink>
         </div>

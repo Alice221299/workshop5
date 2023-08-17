@@ -153,10 +153,10 @@ const ProfileInfo = () => {
           <p>Hello</p>
           <p>Follow me and like</p>
         </div>
-        <div className="profile-buttons">
+        {/* <div className="profile-buttons">
           <button>Follow</button>
           <button>Messages</button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

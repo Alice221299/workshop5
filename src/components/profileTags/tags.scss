@@ -1,0 +1,16 @@
+@import "../../assets/styles/variables.scss";
+
+.pictures-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding-top: 10px;
+    .pictures-element {
+        width: 1fr;
+        
+        img {
+            width: 100%;
+            border-radius: 20px;
+        }
+    }
+}

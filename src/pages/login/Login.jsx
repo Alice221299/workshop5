@@ -52,7 +52,7 @@ const Login = () => {
             <input type="password" className="form-control mt-2"  placeholder="Escriba su contraseña" {...register('password', {required: true})}/>
             </label>
         </div>
-        <button type="submit" className='btn login-button'>Registrarse</button>
+        <button type="submit" className='btn login-button'>Iniciar sesión</button>
         </form>
     </main>
   )

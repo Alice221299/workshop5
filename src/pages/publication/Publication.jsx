@@ -14,6 +14,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getComment, saveComment } from "../../services/commentService";
 import { getAllUsers } from "../../services/usersAll";
 import getPosts, { getPostUser } from "../../services/postsService";
+import NewComment from "../../components/newComment/NewComment";
 
 const Publication = () => {
   const navigate = useNavigate();
@@ -96,7 +97,7 @@ const Publication = () => {
       if (userLogin.isAutenticated) {
         const nuevoComentario = {
           id: comentario.length + 1,
-          postId: comentario.length + 1,
+          postId: posted[0].id, //id del post actual
           userId: userLogin.user.id, // el id del usuario logueado
           text: newComment,
           timestamp: formattedTime,
@@ -138,60 +139,35 @@ const Publication = () => {
             </div>
           </>
         )}
-        <figure className="reactions">
-          {posted.length > 0 && (
-            <div key={posted[0].id} className="reaction">
-              <img src={like} alt="" />
-              <span>
-                {posted[0].likes.map((like, index) => (
-                  <span key={index}>{like}</span>
-                ))}
-              </span>
-            </div>
-          )}
 
-          <div className="reaction">
-            <img src={comment} alt="" />
-            <span>14k</span>
-          </div>
-          <div className="reaction">
-            <img src={share} alt="" />
-            <span>14k</span>
-          </div>
-        </figure>
+        {posted.length > 0 && (
+          <figure key={posted[0].id} className="reactions">
+            <div className="reaction">
+              <img src={like} alt="" />
+              <span>{posted[0].likes.length}</span>
+            </div>
+
+            <div className="reaction">
+              <img src={comment} alt="" />
+              <span>{posted[0].commentsId.length}</span>
+            </div>
+
+            <div className="reaction">
+              <img src={share} alt="" />
+              <span>{posted[0].tags.length}</span>
+            </div>
+          </figure>
+        )}
       </div>
 
       {posted.length > 0 && <p key={posted[0].id}>{posted[0].caption}</p>}
 
-      <div className="comentarios">
-        <span className="title">Comentarios:</span>
-
-        {comentario.map((com, index) => {
-          const commenterUser = users.find((user) => user.id === com.userId);
-          return (
-            <div className="comenta" key={index}>
-              <div className="two">
-                <figure className="avatar">
-                  {commenterUser && <img src={commenterUser.avatar} />}
-                </figure>
-                <div className="answer">
-                  <span className="nameUser">
-                    {commenterUser ? commenterUser.name : "Desconocido"}
-                    {infoUser && com.userId === infoUser.id ? (
-                      <span> Tú</span>
-                    ) : (
-                      infoUser &&
-                      infoUser.id === com.userId && <span>{infoUser.name}</span>
-                    )}
-                  </span>
-                  <span className="textComm">{com.text}</span>
-                </div>
-              </div>
-              <span className="timestamp">{com.timestamp}</span>
-            </div>
-          );
-        })}
-      </div>
+    <NewComment 
+     posted={posted}
+     comentario={comentario}
+     users={users}
+     infoUser={infoUser}
+    />
 
       {infoUser && (
         <>

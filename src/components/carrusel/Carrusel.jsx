@@ -7,7 +7,7 @@ import { getAllUsers } from "../../services/usersAll";
 import { AppContext } from "../../routers/Router";
 const Carrusel = () => {
 
-  const {user: {userLogin}} = useContext(AppContext)
+  const {user: {userLogin}} = useContext(AppContext);
   const [listUsers, setListUsers] = useState([]);
 
   useEffect(() => {

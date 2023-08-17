@@ -22,15 +22,15 @@ const CardPost = ({ info }) => {
       info?.posts?.map((date) => (
         <section 
         className="containerHome__card" 
-        key={date.id} 
-        onClick={() => handlePublication(date.id) }>
+        key={date.id} >
           <div className="containerHome__card-prof">
             <figure className="contain">
               <img className="usuaria" src={info.avatar} alt="" />
             </figure>
             <span>{info.name}</span>
           </div>
-          <figure className="imageCard">
+          <figure className="imageCard"
+          onClick={() => handlePublication(date.id)}>
             <img className="usered" src={date.image} alt="" />
           </figure>
           <div className="containerHome__card-likes">

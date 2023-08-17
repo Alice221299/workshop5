@@ -12,6 +12,7 @@ const Carrusel = () => {
 
   useEffect(() => {
     users();
+    console.log(userLogin)
   }, []);
 
   const users = async () => {

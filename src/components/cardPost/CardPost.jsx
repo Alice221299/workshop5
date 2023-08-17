@@ -6,15 +6,11 @@ import likehome from "/likehome.svg";
 
 const CardPost = ({ info }) => {
 
-  const infoPosts = info;
-  console.log(infoPosts)
-
   return (
-  
     <>
     {
       info?.posts?.map((date) => (
-        <section className="containerHome__card" key={date.id}>
+        <section className="containerHome__card" key={date.id} >
           <div className="containerHome__card-prof">
             <figure className="contain">
               <img className="usuaria" src={info.avatar} alt="" />

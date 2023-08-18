@@ -18,21 +18,12 @@ const Home = () => {
   const postUser = async () => {
     try {
       const response = await getPostUser();
-      console.log(response)
       setListPost(response)
     } catch (error) {
       console.log(error);
       return []
     }
   }
-
-  const handleClick1 = () => {
-    navigate("/profile");
-  };
-
-  const handleClick2 = () => {
-    navigate("/publication");
-  };
 
   return (
     <div className="containerHome">
@@ -47,8 +38,6 @@ const Home = () => {
       </div>
 
       <Carrusel />
-      <button onClick={handleClick1}>Profile</button>
-      <button onClick={handleClick2}>Publication</button>
       <div className="container-post">
       {
         listPost?.map((post) => (

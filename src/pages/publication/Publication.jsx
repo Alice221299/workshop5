@@ -1,21 +1,22 @@
 import React from "react";
 import "./publication.scss";
 import card from "/card.jpeg";
-import iconLeft from "/Vector.png";
+import iconLeft from "/Vector.svg";
 import iconRight from "/point.svg";
 import like from "/like.svg";
 import comment from "/comment.svg";
 import share from "/share.svg";
 import enviar from "/enviar.svg";
-import { getOneUser } from "../../services/userService";
+import { getOneUser, getUser } from "../../services/userService";
 import { useState, useEffect, useContext } from "react";
 import { AppContext } from "../../routers/Router";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getComment, saveComment } from "../../services/commentService";
 import { getAllUsers } from "../../services/usersAll";
+import getPosts, { getPostUser } from "../../services/postsService";
 
 const Publication = () => {
-   const navigate = useNavigate();
+  const navigate = useNavigate();
   const {
     user: { userLogin },
   } = useContext(AppContext);
@@ -23,10 +24,13 @@ const Publication = () => {
   const [comentario, setCommentario] = useState([]); //traer comentarios
   const [users, setUsers] = useState([]); //todos los usuarios
   const [newComment, setNewComment] = useState(""); //nuevo comentario
+  const [postUser, setPostUser] = useState();
   const now = new Date();
   const hour = now.getHours();
   const minute = now.getMinutes();
   const formattedTime = `${hour}:${minute}`;
+  const { idPost } = useParams();
+  const [posted, setPosted] = useState([]);
 
   useEffect(() => {
     // si el usuario esta autenticado obtengo los detalles
@@ -43,10 +47,22 @@ const Publication = () => {
       fetchComment();
       fetchUsers();
     }
+    detailPost();
   }, [userLogin]);
 
+  const detailPost = async () => {
+    const detail = await getPosts();
+    const filter = detail.filter((post) => post.id == idPost);
+    setPosted(filter);
+    console.log("posted", filter);
+
+    const userPost = await getUser(filter[0]?.userId);
+    setPostUser(userPost);
+    console.log("postuser", userPost);
+  };
+
   const handleClick = () => {
-    navigate("/profile");
+    navigate("/");
   };
   //traer el comentario
   const fetchComment = async () => {
@@ -83,7 +99,7 @@ const Publication = () => {
           postId: comentario.length + 1,
           userId: userLogin.user.id, // el id del usuario logueado
           text: newComment,
-          timestamp: formattedTime
+          timestamp: formattedTime,
         };
 
         setCommentario([...comentario, nuevoComentario]);
@@ -91,40 +107,49 @@ const Publication = () => {
 
         // Limpiar el campo de comentario
         setNewComment("");
-        saveComment(nuevoComentario)
+        saveComment(nuevoComentario);
       }
     }
   };
 
   return (
     <div className="containerPubli">
-      <figure className="containerPubli__figure">
-        <img src={card} alt="" className="profile" />
-        <img
-          onClick={handleClick}
-          src={iconLeft}
-          alt="Icono Izquierdo"
-          className="icon-left"
-        />
-        <img src={iconRight} alt="Icono Derecho" className="icon-right" />
-      </figure>
+      {posted.length > 0 && (
+        <figure key={posted[0].image} className="containerPubli__figure">
+          <img src={posted[0].image} alt="" className="profile" />
+          <img
+            onClick={handleClick}
+            src={iconLeft}
+            alt="Icono Izquierdo"
+            className="icon-left"
+          />
+          <img src={iconRight} alt="Icono Derecho" className="icon-right" />
+        </figure>
+      )}
 
       <div className="infoProfile">
-        {infoUser && (
+        {postUser?.length > 0 && (
           <>
-            <div className="user">
+            <div key={postUser[0].id} className="user">
               <figure className="avatar">
-                <img src={infoUser.avatar} alt="" />
+                <img src={postUser[0].avatar} alt="" />
               </figure>
-              <h2>{infoUser.name}</h2>
+              <h2>{postUser[0].name}</h2>
             </div>
           </>
         )}
         <figure className="reactions">
-          <div className="reaction">
-            <img src={like} alt="" />
-            <span>14k</span>
-          </div>
+          {posted.length > 0 && (
+            <div key={posted[0].id} className="reaction">
+              <img src={like} alt="" />
+              <span>
+                {posted[0].likes.map((like, index) => (
+                  <span key={index}>{like}</span>
+                ))}
+              </span>
+            </div>
+          )}
+
           <div className="reaction">
             <img src={comment} alt="" />
             <span>14k</span>
@@ -136,45 +161,36 @@ const Publication = () => {
         </figure>
       </div>
 
-      <p>
-        Estoy emocionada por unirme a esta plataforma y explorar nuevas
-        conexiones. Espero compartir experiencias y aprender de otros miembros.
-        Juntos, crearemos un espacio vibrante y enriquecedor.
-      </p>
+      {posted.length > 0 && <p key={posted[0].id}>{posted[0].caption}</p>}
 
       <div className="comentarios">
         <span className="title">Comentarios:</span>
-        
-          {comentario.map((com, index) => {
-            const commenterUser = users.find((user) => user.id === com.userId);
-            return (
-                  <div className="comenta" key={index}>
-                    <div className="two">
-                  <figure className="avatar">
+
+        {comentario.map((com, index) => {
+          const commenterUser = users.find((user) => user.id === com.userId);
+          return (
+            <div className="comenta" key={index}>
+              <div className="two">
+                <figure className="avatar">
                   {commenterUser && <img src={commenterUser.avatar} />}
-                  </figure>
-                  <div className="answer">
-                    <span className="nameUser">
-                      {commenterUser ? commenterUser.name : "Desconocido"}
-                      {infoUser && com.userId === infoUser.id ? (
-                        <span> Tú</span>
-                      ) : (
-                        infoUser &&
-                        infoUser.id === com.userId && (
-                          <span>{infoUser.name}</span>
-                        )
-                      )}
-                    </span>
-                    <span className="textComm">{com.text}</span>
-                    
-                  </div>
-                  </div>
-                  <span className="timestamp">{com.timestamp}</span>
+                </figure>
+                <div className="answer">
+                  <span className="nameUser">
+                    {commenterUser ? commenterUser.name : "Desconocido"}
+                    {infoUser && com.userId === infoUser.id ? (
+                      <span> Tú</span>
+                    ) : (
+                      infoUser &&
+                      infoUser.id === com.userId && <span>{infoUser.name}</span>
+                    )}
+                  </span>
+                  <span className="textComm">{com.text}</span>
                 </div>
-              
-            );
-          })}
-        
+              </div>
+              <span className="timestamp">{com.timestamp}</span>
+            </div>
+          );
+        })}
       </div>
 
       {infoUser && (

@@ -1,42 +1,54 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import text from "/text.svg";
 import share from "/share.svg";
 import savehome from "/savehome.svg";
-import likehome from "/likehome.svg";
+import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../../routers/Router';
+import CardLike from '../cardLike/CardLike';
+import CardSavePost from '../cardSavePost/CardSavePost';
 
 const CardPost = ({ info }) => {
+
+  const navigate = useNavigate();
+  const {user: {userLogin}} = useContext(AppContext);
+
+  const handlePublication = (idPost) =>{
+    navigate(`${idPost}`)
+  };
 
   return (
     <>
     {
       info?.posts?.map((date) => (
-        <section className="containerHome__card" key={date.id} >
+        <section 
+        className="containerHome__card" 
+        key={date.id} >
           <div className="containerHome__card-prof">
             <figure className="contain">
               <img className="usuaria" src={info.avatar} alt="" />
             </figure>
             <span>{info.name}</span>
           </div>
-          <figure className="imageCard">
+          <figure className="imageCard"
+          onClick={() => handlePublication(date.id)}>
             <img className="usered" src={date.image} alt="" />
           </figure>
           <div className="containerHome__card-likes">
             <figure className="down">
-              <div className="reaction">
-                <img src={likehome} alt="" />
-                <span>14k</span>
+              <div className="reaction" >
+                <CardLike post={date}/>
               </div>
               <div className="reaction">
                 <img src={text} alt="" />
-                <span>14k</span>
+                <span>{date.commentsId.length}</span>
               </div>
               <div className="reaction">
                 <img src={share} alt="" />
-                <span>14k</span>
+                <span>{date.tags.length}</span>
               </div>
             </figure>
             <figure>
-              <img src={savehome} alt="" />
+              <CardSavePost idPost={date.id}/>
             </figure>
           </div>
           <div className="containPublication">

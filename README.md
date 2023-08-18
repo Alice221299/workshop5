@@ -25,7 +25,7 @@ Aplicación de web findy que es un tipo de red social que permite interacruar en
     "email": "stefannya@gmail.com",
     "password": "stefannya123",
 
-
+4. Para acceder al detalle de la publicación da click en la foto.
 
 ## Funcionalidades
 
@@ -41,8 +41,13 @@ Aplicación de web findy que es un tipo de red social que permite interacruar en
 - React Js: Biblioteca de JavaScript para construir interfaces de usuario interactivas y dinámicas.
 - JavaScript: Lenguaje de programación ampliamente utilizado para la interacción del lado del cliente en aplicaciones web.
 - SweetAlert: Biblioteca para mostrar mensajes de alerta atractivos y personalizables en la interfaz de usuario.
+- SASS: preprocesador de hojas de estilo CSS
 - Bootstrap: es un framework front-end utilizado para diseño de aplicaciones y sitios web.
 - Se evidencia el uso de useReducer y appContext
+- React router dom: libreria para el enrutamiento
+- React hook form: biblioteca de gestión de formularios.
+- Uso de hook personalizado como useSessionStorage
+
 
 ## Desarrolladores
 

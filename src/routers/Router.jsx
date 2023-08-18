@@ -14,6 +14,8 @@ import ProfileAlbum from '../components/profileAlbum/ProfileAlbum';
 import ProfileTags from '../components/profileTags/ProfileTags';
 import ProfileVideos from '../components/profileVideos/ProfileVideos';
 import OtherProfile, { OtherProfilePhotos } from '../pages/otherProfile/OtherProfile';
+import Registro from '../pages/registro/Registro';
+import NewPublication from '../components/newPublication/NewPublication';
 
 export const AppContext = createContext({});
 
@@ -57,11 +59,13 @@ const Router = () => {
         <Route path='/'>
                 <Route element={<PublicRouter isAutenticated={userLogin.isAutenticated}/>}>
                     <Route path='login' element={<Login/>}/>
+                    <Route path="registro" element={<Registro />}/>
                 </Route>
 
                 <Route element={<PrivateRouter isAutenticated={userLogin.isAutenticated}/>}>
                     <Route element={<Layout/>}>
                         <Route index element={<Home/>}/>
+                        <Route path='newPublication' element={<NewPublication/>}/>
                         <Route path='profile' element={<Profile/>}>
                             <Route path='photos' element={<ProfilePhotos/>}/>
                             <Route path='videos' element={<ProfileVideos/>}/>

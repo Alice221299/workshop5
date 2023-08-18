@@ -11,9 +11,16 @@ import { getOneUser, getUser } from "../../services/userService";
 import { useState, useEffect, useContext } from "react";
 import { AppContext } from "../../routers/Router";
 import { useNavigate, useParams } from "react-router-dom";
-import { getComment, saveComment } from "../../services/commentService";
+import {
+  editComment,
+  getComment,
+  saveComment,
+} from "../../services/commentService";
 import { getAllUsers } from "../../services/usersAll";
-import getPosts, { getPostUser } from "../../services/postsService";
+import getPosts, { editPost, getPostUser } from "../../services/postsService";
+import NewComment from "../../components/newComment/NewComment";
+import CardLike from "../../components/cardLike/CardLike";
+
 
 const Publication = () => {
   const navigate = useNavigate();
@@ -33,70 +40,95 @@ const Publication = () => {
   const [posted, setPosted] = useState([]);
 
   useEffect(() => {
-    // si el usuario esta autenticado obtengo los detalles
-    if (userLogin.isAutenticated) {
-      const fetchUserInfo = async () => {
-        const detail = await getOneUser(
-          userLogin.user.email,
-          userLogin.user.password
-        );
-        setInfoUser(detail);
-      };
-
-      fetchUserInfo();
-      fetchComment();
-      fetchUsers();
-    }
+    fetchComment();
+    fetchUsers();
     detailPost();
+    handleNewComment();
   }, [userLogin]);
 
   const detailPost = async () => {
     const detail = await getPosts();
     const filter = detail.filter((post) => post.id == idPost);
     setPosted(filter);
-    console.log("posted", filter);
 
     const userPost = await getUser(filter[0]?.userId);
     setPostUser(userPost);
-    console.log("postuser", userPost);
   };
 
   const handleClick = () => {
     navigate("/");
   };
-  //traer el comentario
+  //trae todos los comentarios del post actual
   const fetchComment = async () => {
     try {
+      //este trae solo los comentarios del post actual
       const comments = await getComment();
-      setCommentario(comments);
+      const response = await getPosts();
+      const filterPost = response.filter((item) => item.id == idPost);
+      if (filterPost?.length > 0) {
+        // Verifica si hay una publicación actual
+        const commentsForPost = comments?.filter(
+          (comment) => comment.postId === filterPost[0].id
+        );
+        setCommentario(commentsForPost);
+      }
     } catch (error) {
       console.log(error);
     }
   };
-
-  // console.log(comentario);
 
   //para traer la lista de usuarios
   const fetchUsers = async () => {
     try {
       const usersList = await getAllUsers();
-      console.log(usersList);
       setUsers(usersList);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
-
-  // console.log(users);
 
   //add comentario
 
-  const handleNewComment = () => {
+  const handleNewComment = async () => {
+    const response = await getPosts();
+    const filterPost = response.filter((item) => item.id == idPost);
     if (newComment.trim() !== "") {
       if (userLogin.isAutenticated) {
+        try {
+          // Obtener la lista de comentarios existentes del backend
+          const existingComments = await getComment();
+
+          // calcular el id basado en los comentarios existentes
+          const nextCommentId =
+            Math.max(...existingComments.map((comment) => comment.id)) + 1;
+
+          const nuevoComentario = {
+            id: nextCommentId,
+            postId: posted[0].id,
+            userId: userLogin.user.id,
+            text: newComment,
+            timestamp: formattedTime,
+          };
+
+          const idComment = [...filterPost[0].commentsId, nextCommentId];
+          const newComent = {
+            commentsId: idComment,
+          };
+
+          const editCommentPost = await editPost(newComent, idPost);
+
+          setCommentario([...comentario, nuevoComentario]);
+
+          // Limpiar el campo de comentario
+          setNewComment("");
+
+          // Guardar el nuevo comentario en el backend
+          saveComment(nuevoComentario);
+        } catch (error) {
+          console.log("Error al agregar un nuevo comentario:", error);
+        }
+
         const nuevoComentario = {
           id: comentario.length + 1,
-          postId: comentario.length + 1,
+          postId: posted[0].id, //id del post actual
           userId: userLogin.user.id, // el id del usuario logueado
           text: newComment,
           timestamp: formattedTime,
@@ -108,6 +140,7 @@ const Publication = () => {
         // Limpiar el campo de comentario
         setNewComment("");
         saveComment(nuevoComentario);
+
       }
     }
   };
@@ -138,66 +171,41 @@ const Publication = () => {
             </div>
           </>
         )}
-        <figure className="reactions">
-          {posted.length > 0 && (
-            <div key={posted[0].id} className="reaction">
-              <img src={like} alt="" />
-              <span>
-                {posted[0].likes.map((like, index) => (
-                  <span key={index}>{like}</span>
-                ))}
-              </span>
-            </div>
-          )}
 
-          <div className="reaction">
-            <img src={comment} alt="" />
-            <span>14k</span>
-          </div>
-          <div className="reaction">
-            <img src={share} alt="" />
-            <span>14k</span>
-          </div>
-        </figure>
+        {posted.length > 0 && (
+          <figure key={posted[0].id} className="reactions">
+            <div className="reaction">
+              <CardLike post={posted[0]} />
+            </div>
+
+            <div className="reaction">
+              <img src={comment} alt="" />
+              <span>{posted[0].commentsId.length}</span>
+            </div>
+
+            <div className="reaction">
+              <img src={share} alt="" />
+              <span>{posted[0].tags.length}</span>
+            </div>
+          </figure>
+        )}
       </div>
 
       {posted.length > 0 && <p key={posted[0].id}>{posted[0].caption}</p>}
 
-      <div className="comentarios">
-        <span className="title">Comentarios:</span>
+      <NewComment
+        posted={posted}
+        comentario={comentario}
+        users={users}
+        infoUser={infoUser}
+      />
 
-        {comentario.map((com, index) => {
-          const commenterUser = users.find((user) => user.id === com.userId);
-          return (
-            <div className="comenta" key={index}>
-              <div className="two">
-                <figure className="avatar">
-                  {commenterUser && <img src={commenterUser.avatar} />}
-                </figure>
-                <div className="answer">
-                  <span className="nameUser">
-                    {commenterUser ? commenterUser.name : "Desconocido"}
-                    {infoUser && com.userId === infoUser.id ? (
-                      <span> Tú</span>
-                    ) : (
-                      infoUser &&
-                      infoUser.id === com.userId && <span>{infoUser.name}</span>
-                    )}
-                  </span>
-                  <span className="textComm">{com.text}</span>
-                </div>
-              </div>
-              <span className="timestamp">{com.timestamp}</span>
-            </div>
-          );
-        })}
-      </div>
 
-      {infoUser && (
+      {userLogin.user && (
         <>
           <div className="coment">
             <figure className="photo">
-              <img src={infoUser.avatar} alt="" />
+              <img src={userLogin.user.avatar} alt="" />
             </figure>
 
             <div className="input-container">
@@ -206,7 +214,7 @@ const Publication = () => {
                 className="inputField"
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
-                placeholder={`Escribe un comentario como ${infoUser.name}`}
+                placeholder={`Escribe un comentario como ${userLogin.user.name}`}
               />
               <img
                 onClick={handleNewComment}

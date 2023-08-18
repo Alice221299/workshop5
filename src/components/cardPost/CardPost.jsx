@@ -6,15 +6,27 @@ import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../routers/Router';
 import CardLike from '../cardLike/CardLike';
 import CardSavePost from '../cardSavePost/CardSavePost';
+import { getSession } from '../../services/sessionService';
 
 const CardPost = ({ info }) => {
 
   const navigate = useNavigate();
+  const loggedUser = getSession();
   const {user: {userLogin}} = useContext(AppContext);
 
   const handlePublication = (idPost) =>{
     navigate(`${idPost}`)
   };
+
+  const handleUserProfile = (idUser) =>{
+    if (idUser === loggedUser.id) {
+      navigate('/profile')
+    }else {
+      navigate(`${idUser}/profile`)
+    }
+    
+  };
+
 
   return (
     <>
@@ -25,7 +37,7 @@ const CardPost = ({ info }) => {
         key={date.id} >
           <div className="containerHome__card-prof">
             <figure className="contain">
-              <img className="usuaria" src={info.avatar} alt="" />
+              <img className="usuaria" src={info.avatar} alt="" onClick={() => handleUserProfile(info.id)}/>
             </figure>
             <span>{info.name}</span>
           </div>

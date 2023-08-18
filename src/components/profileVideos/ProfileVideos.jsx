@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
-import "./photos.scss"
+import "./videos.scss"
 import { AppContext } from '../../routers/Router'
 import { getSession } from '../../services/sessionService'
 
-const ProfilePhotos = () => {
+const ProfileVideos = () => {
+
   const [userPosts, setUserPosts] = useState([])
   const {posts} = useContext(AppContext)
   const user = getSession()
@@ -19,11 +20,15 @@ const ProfilePhotos = () => {
     }
 }
   return (
-    <div className='pictures-container'>
+    <div className='videos-container'>
       {posts && userPosts.length > 0 && userPosts.map((post) => (
-        <figure className='pictures-element' key={post.id}>
-            <img  src={post.image} alt="Image" />
-        </figure>
+        <iframe
+        className='video'
+        src={post.video}
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen>
+    </iframe>
       ))
       
       }
@@ -32,4 +37,4 @@ const ProfilePhotos = () => {
   )
 }
 
-export default ProfilePhotos
+export default ProfileVideos

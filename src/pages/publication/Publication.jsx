@@ -20,6 +20,7 @@ import { getAllUsers } from "../../services/usersAll";
 import getPosts, { editPost, getPostUser } from "../../services/postsService";
 import NewComment from "../../components/newComment/NewComment";
 import CardLike from "../../components/cardLike/CardLike";
+import Nav from "../../components/nav/Nav";
 
 
 const Publication = () => {
@@ -222,6 +223,7 @@ const Publication = () => {
           </div>
         </>
       )}
+      <Nav/>
     </div>
   );
 };

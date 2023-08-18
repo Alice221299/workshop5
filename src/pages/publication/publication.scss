@@ -8,7 +8,7 @@
     rgba(248, 248, 248, 1) 50%,
     rgba(255, 118, 116, 0.4963235294117647) 100%
   );
-
+padding-bottom: 5rem;
   &__figure {
     margin-bottom: 10px;
     height: 65vh;
@@ -102,10 +102,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 10px;
+    margin: 0 20px;
+    gap: 10px;
     .photo {
-      width: 32px;
-      height: 32px;
+      width: 38px;
+      height: 38px;
       margin: 0;
       img {
         width: 100%;

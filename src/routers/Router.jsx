@@ -14,7 +14,6 @@ import ProfileAlbum from '../components/profileAlbum/ProfileAlbum';
 import ProfileTags from '../components/profileTags/ProfileTags';
 import Registro from '../pages/registro/Registro';
 import NewPublication from '../components/newPublication/NewPublication';
-import Registro from '../pages/registro/Registro';
 
 export const AppContext = createContext({});
 

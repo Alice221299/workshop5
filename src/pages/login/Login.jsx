@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../../routers/Router'
 import { useForm } from 'react-hook-form'
 import { getOneUser } from '../../services/userService'
@@ -52,7 +52,12 @@ const Login = () => {
             <input type="password" className="form-control mt-2"  placeholder="Escriba su contraseña" {...register('password', {required: true})}/>
             </label>
         </div>
-        <button type="submit" className='btn login-button'>Iniciar sesión</button>
+        <button type="submit" className='btn login-button mb-4'>Iniciar sesión</button>
+        <span className="text-white text-center d-block mb-2">
+         ¿Deseas registrarte? 
+         <hr />
+         <Link to='/registro' className="text-dark">Registrar usuario</Link>
+        </span>
         </form>
     </main>
   )

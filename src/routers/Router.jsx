@@ -16,7 +16,6 @@ import ProfileVideos from '../components/profileVideos/ProfileVideos';
 import OtherProfile, { OtherProfilePhotos } from '../pages/otherProfile/OtherProfile';
 import Registro from '../pages/registro/Registro';
 import NewPublication from '../components/newPublication/NewPublication';
-import Registro from '../pages/registro/Registro';
 
 export const AppContext = createContext({});
 

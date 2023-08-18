@@ -26,7 +26,6 @@ const OtherProfile = () => {
     const findUser = async() => {
         const resp = await getUserPost(idUser)
         setClickedUser(resp)
-        // validateFollow()
     }
 
     const onClickBack = () => {

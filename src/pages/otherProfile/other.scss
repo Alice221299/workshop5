@@ -1,0 +1,99 @@
+@import "../../assets/styles/reset.scss";
+@import "../../assets/styles/variables.scss";
+
+.profile-info {
+    width: 100vw;
+    .profile-background {
+        height: 30vh;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        justify-content: space-between;
+        padding: 2rem;
+        position: relative;
+        img {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .profile-avatar {
+        position: absolute;
+        bottom: -35px;
+        left: 40%;
+        height: 70px;
+        width: 70px;
+        border-radius: 50%;
+        border: 2px solid $light-pink;
+        object-fit: cover;
+    }
+    }
+    .user-info {
+        background: linear-gradient(45deg, rgba(255,188,116,0.5) 0%, rgba(248,248,248,1) 50%, rgba(255,118,116,0.4963235294117647) 100%);
+        .info-numbers {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 3rem;
+            font-family: $font-primary;
+            text-align: center;
+            span {
+                font-weight: 700;
+                font-size: 16px;
+                
+            }
+            p {
+                font-weight: 400;
+                font-size: 12px;
+                margin-bottom: 0;
+            }
+        }
+        .info-name {
+            text-align: center;
+            font-family: $font-primary;
+            h3 {
+                font-weight: 700;
+                font-size: 16px;
+            }
+            p {
+                font-weight: 400;
+                font-size: 12px;
+                margin-bottom: 0;
+            }
+        }
+        .profile-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 5%;
+            button {
+                background-color: $red;
+                color: $white;
+                font-family: $font-primary;
+                font-weight: 700;
+                font-size: 20px;
+                width: 40%;
+                border: none;
+                border-radius: 10px;
+                margin: 1rem 0 2.5rem 0;
+            }
+        }
+    }
+}
+.profile-filter {
+    background-color: $white;
+    border-radius: 30px;
+    margin-top: -1.5rem;
+    padding: 1rem;
+    .profile-navbar {
+        display: flex;
+        justify-content: space-around;
+        .profile-link {
+            color: black;
+            text-decoration: none;
+            font-family: $font-primary;
+        }
+        .active {
+            text-decoration: underline;
+            text-decoration-color: $red;
+        }
+    }
+}

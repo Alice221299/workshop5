@@ -5,7 +5,7 @@ import points from "/images/points.svg";
 import { AppContext } from "../../routers/Router";
 import { getSession, saveSession } from "../../services/sessionService";
 import { useNavigate } from "react-router-dom";
-import { editUser, getUserPost } from "../../services/userService";
+import { editUser} from "../../services/userService";
 import { initialUser, userReducer } from "../../reducers/useReducer";
 import getPosts from "../../services/postsService";
 import close from "/images/close.svg"
@@ -21,7 +21,6 @@ const ProfileInfo = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch({ type: "update", payload: user });
     getAllPosts();
   }, []);
 

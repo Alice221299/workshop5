@@ -112,11 +112,8 @@ const Publication = () => {
           const newComent = {
             commentsId: idComment,
           };
-
           const editCommentPost = await editPost(newComent, idPost);
-
           setCommentario([...comentario, nuevoComentario]);
-
           // Limpiar el campo de comentario
           setNewComment("");
 

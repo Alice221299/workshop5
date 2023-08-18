@@ -17,7 +17,6 @@ const ProfileTags = () => {
         if (posts) {
             const taggedUserPosts = posts.filter(post => post.tags.find(tag => tag === user.id))
             setTaggedPosts(taggedUserPosts)
-            console.log(taggedPosts);
         }
     }
 

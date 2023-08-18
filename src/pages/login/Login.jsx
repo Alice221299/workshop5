@@ -18,7 +18,6 @@ const Login = () => {
     const onSubmit = async(data) => {
         try {
             const user = await getOneUser(data.email, data.password)
-            console.log(user);
             if (user) {
                 Swal.fire('Bienvenide', `Bienvenide ${user.name}`, 'success').then(() => {
                 userDispatch({

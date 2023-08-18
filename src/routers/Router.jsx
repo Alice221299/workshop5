@@ -13,12 +13,14 @@ import ProfilePhotos from '../components/profilePhotos/ProfilePhotos';
 import ProfileAlbum from '../components/profileAlbum/ProfileAlbum';
 import ProfileTags from '../components/profileTags/ProfileTags';
 import ProfileVideos from '../components/profileVideos/ProfileVideos';
+import OtherProfile, { OtherProfilePhotos } from '../pages/otherProfile/OtherProfile';
 
 export const AppContext = createContext({});
 
 const Router = () => {
 
     const [posts, setPosts] = useState(null)
+    const [clickedUser, setClickedUser] = useState(null)
 
     useEffect(() => {
         const user = getSession()
@@ -46,7 +48,7 @@ const Router = () => {
     const globalState = {user: {
         userLogin,
         userDispatch
-    }, handleLogout, posts, setPosts}
+    }, handleLogout, posts, setPosts, clickedUser, setClickedUser}
 
   return (
     <AppContext.Provider value={globalState}>
@@ -65,6 +67,10 @@ const Router = () => {
                             <Route path='videos' element={<ProfileVideos/>}/>
                             <Route path='album' element={<ProfileAlbum/>}/>
                             <Route path='tags' element={<ProfileTags/>}/>
+                        </Route>
+                        <Route path=':idUser' element={<OtherProfile/>}>
+                            <Route path='user-photos' element={<OtherProfilePhotos/>}/>
+                            <Route path='album' element={<ProfileAlbum/>}/>
                         </Route>
                         <Route path=':idPost' element={<Publication/>}/>
                     </Route>

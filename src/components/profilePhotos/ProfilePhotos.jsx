@@ -16,7 +16,6 @@ const ProfilePhotos = () => {
     if (posts) {
         const userFoundPosts = posts.filter(post => post.userId === user.id)
         setUserPosts(userFoundPosts)
-        console.log(userFoundPosts);
     }
 }
   return (

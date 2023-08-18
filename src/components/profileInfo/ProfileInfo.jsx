@@ -5,7 +5,7 @@ import points from "/images/points.svg";
 import { AppContext } from "../../routers/Router";
 import { getSession, saveSession } from "../../services/sessionService";
 import { useNavigate } from "react-router-dom";
-import { editUser} from "../../services/userService";
+import { editUser, getUserPost } from "../../services/userService";
 import { initialUser, userReducer } from "../../reducers/useReducer";
 import getPosts from "../../services/postsService";
 import close from "/images/close.svg"
@@ -21,18 +21,13 @@ const ProfileInfo = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    dispatch({ type: "update", payload: user });
     getAllPosts();
   }, []);
-
-  // newUser{
-
-  // }
-  // dispatch({type: "update", payload: newUser})
 
   const getAllPosts = async () => {
     const response = await getPosts();
     setPosts(response);
-    console.log(response);
   };
 
   const onClickBack = () => {
@@ -75,15 +70,20 @@ const ProfileInfo = () => {
       <div
         className="profile-background"
         style={{
-          backgroundImage: `url(https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80)`,
+          backgroundImage: `url(${state.user?.background})`,
         }}
       >
-        <img src={arrow} alt="Icon for arrow back" onClick={onClickBack} />
-        <img
+        <figure>
+          <img src={arrow} alt="Icon for arrow back" onClick={onClickBack} />
+        </figure>
+        <figure>
+          <img
           src={points}
           alt="Icon for more actions"
           onClick={() => setOptions(!options)}
         />
+        </figure>
+        
         {options && (
             <>
           <div className="profile-options">
@@ -152,10 +152,6 @@ const ProfileInfo = () => {
           <p>Hello</p>
           <p>Follow me and like</p>
         </div>
-        {/* <div className="profile-buttons">
-          <button>Follow</button>
-          <button>Messages</button>
-        </div> */}
       </div>
     </div>
   );

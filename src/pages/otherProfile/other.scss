@@ -12,10 +12,17 @@
         justify-content: space-between;
         padding: 2rem;
         position: relative;
-        img {
+        .icon-back {
+            background-color: $white;
+            padding: 8px 10px 10px 8px;
+            border-radius: 50%;
+            height: fit-content;
+            img {
             width: 24px;
             height: 24px;
         }
+        }
+        
         
         .profile-avatar {
         position: absolute;
@@ -28,6 +35,7 @@
         object-fit: cover;
     }
     }
+    
     .user-info {
         background: linear-gradient(45deg, rgba(255,188,116,0.5) 0%, rgba(248,248,248,1) 50%, rgba(255,118,116,0.4963235294117647) 100%);
         .info-numbers {
@@ -47,7 +55,7 @@
                 margin-bottom: 0;
             }
         }
-        .info-name {
+        .user-info-name {
             text-align: center;
             font-family: $font-primary;
             h3 {
@@ -94,6 +102,22 @@
         .active {
             text-decoration: underline;
             text-decoration-color: $red;
+        }
+    }
+}
+
+
+.pictures-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding-top: 10px;
+    .pictures-element {
+        width: 1fr;
+        
+        img {
+            width: 100%;
+            border-radius: 20px;
         }
     }
 }

@@ -22,10 +22,11 @@ const CardPost = ({ info }) => {
     if (idUser === loggedUser.id) {
       navigate('/profile')
     }else {
-      navigate(`${idUser}`)
+      navigate(`${idUser}/profile`)
     }
     
   };
+
 
   return (
     <>

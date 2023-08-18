@@ -20,7 +20,7 @@ const OtherProfile = () => {
 
     useEffect(() => {
         validateFollow()
-        navigate(`/${clickedUser?.id}/user-photos`)
+        navigate(`/${clickedUser?.id}/profile/user-photos`)
     }, [clickedUser])
 
     const findUser = async() => {

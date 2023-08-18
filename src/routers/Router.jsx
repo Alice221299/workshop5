@@ -12,6 +12,7 @@ import PrivateRouter from './PrivateRouter';
 import ProfilePhotos from '../components/profilePhotos/ProfilePhotos';
 import ProfileAlbum from '../components/profileAlbum/ProfileAlbum';
 import ProfileTags from '../components/profileTags/ProfileTags';
+import Registro from '../pages/registro/Registro';
 
 export const AppContext = createContext({});
 
@@ -54,6 +55,7 @@ const Router = () => {
         <Route path='/'>
                 <Route element={<PublicRouter isAutenticated={userLogin.isAutenticated}/>}>
                     <Route path='login' element={<Login/>}/>
+                    <Route path="registro" element={<Registro />}/>
                 </Route>
 
                 <Route element={<PrivateRouter isAutenticated={userLogin.isAutenticated}/>}>

@@ -22,3 +22,16 @@ export const saveComment = async(comment) =>{
         return null;
     }
 }
+
+export const editComment = async (commentId, updatedComment) => {
+    try {
+      const response = await axios.patch(
+        `${endpoints.urlComments}/${commentId}`,
+        updatedComment
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };

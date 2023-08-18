@@ -12,6 +12,7 @@ import PrivateRouter from './PrivateRouter';
 import ProfilePhotos from '../components/profilePhotos/ProfilePhotos';
 import ProfileAlbum from '../components/profileAlbum/ProfileAlbum';
 import ProfileTags from '../components/profileTags/ProfileTags';
+import NewPublication from '../components/newPublication/NewPublication';
 import Registro from '../pages/registro/Registro';
 
 export const AppContext = createContext({});
@@ -61,6 +62,7 @@ const Router = () => {
                 <Route element={<PrivateRouter isAutenticated={userLogin.isAutenticated}/>}>
                     <Route element={<Layout/>}>
                         <Route index element={<Home/>}/>
+                        <Route path='newPublication' element={<NewPublication/>}/>
                         <Route path='profile' element={<Profile/>}>
                             <Route path='photos' element={<ProfilePhotos/>}/>
                             <Route path='album' element={<ProfileAlbum/>}/>

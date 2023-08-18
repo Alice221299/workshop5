@@ -10,3 +10,13 @@ export const getAllUsers = async () => {
     return null;
   }
 };
+
+export const saveUser = async (user) =>{
+  try {
+      const { data } = await axios.post(endpoints.urlUsers, user)
+      return data;
+  } catch (error) {
+      console.log(error)
+      return null
+  }
+}

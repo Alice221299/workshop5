@@ -2,13 +2,19 @@ import React, { useContext, useEffect, useState } from "react";
 import "./newComment.scss";
 import { AppContext } from "../../routers/Router";
 const NewComment = ({ posted, comentario, users, infoUser }) => {
- 
+  useEffect(() => {}, []);
+
+  const validateComment = () => {
+    
+  };
+
   return (
     <div className="comentarios">
       <span className="title">Comentarios:</span>
 
       {posted.length > 0 &&
         comentario?.map((com, index) => {
+
           // para ver si el postId del comentario coincide con el id de la publicación actual
           if (com.postId === posted[0].id) {
             const commenterUser = users.find((user) => user.id === com.userId);

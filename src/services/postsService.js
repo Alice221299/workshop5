@@ -35,3 +35,13 @@ export const editPost = async (newPost, postId) => {
         return null
     }
 }
+
+export const savePost = async (post) => {
+    try {
+        const { data } = await axios.post(endpoints.urlPosts, post);
+        return data;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
+}

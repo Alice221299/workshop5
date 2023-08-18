@@ -21,6 +21,7 @@ import getPosts, { editPost, getPostUser } from "../../services/postsService";
 import NewComment from "../../components/newComment/NewComment";
 import CardLike from "../../components/cardLike/CardLike";
 
+
 const Publication = () => {
   const navigate = useNavigate();
   const {
@@ -124,6 +125,22 @@ const Publication = () => {
         } catch (error) {
           console.log("Error al agregar un nuevo comentario:", error);
         }
+
+        const nuevoComentario = {
+          id: comentario.length + 1,
+          postId: posted[0].id, //id del post actual
+          userId: userLogin.user.id, // el id del usuario logueado
+          text: newComment,
+          timestamp: formattedTime,
+        };
+
+        setCommentario([...comentario, nuevoComentario]);
+        console.log(nuevoComentario);
+
+        // Limpiar el campo de comentario
+        setNewComment("");
+        saveComment(nuevoComentario);
+
       }
     }
   };
@@ -163,7 +180,7 @@ const Publication = () => {
 
             <div className="reaction">
               <img src={comment} alt="" />
-              <span>{comentario.length}</span>
+              <span>{posted[0].commentsId.length}</span>
             </div>
 
             <div className="reaction">
@@ -182,6 +199,7 @@ const Publication = () => {
         users={users}
         infoUser={infoUser}
       />
+
 
       {userLogin.user && (
         <>

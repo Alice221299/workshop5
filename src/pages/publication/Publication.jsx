@@ -223,7 +223,7 @@ const Publication = () => {
           </div>
         </>
       )}
-      <Nav/>
+     
     </div>
   );
 };

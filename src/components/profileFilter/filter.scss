@@ -1,0 +1,21 @@
+@import "../../assets/styles/variables.scss";
+
+.profile-filter {
+    background-color: $white;
+    border-radius: 30px;
+    margin-top: -1.5rem;
+    padding: 1rem;
+    .profile-navbar {
+        display: flex;
+        justify-content: space-around;
+        .profile-link {
+            color: black;
+            text-decoration: none;
+            font-family: $font-primary;
+        }
+        .active {
+            text-decoration: underline;
+            text-decoration-color: $red;
+        }
+    }
+}

@@ -1,0 +1,117 @@
+@import "/src/assets/styles/reset.scss";
+@import "/src/assets/styles/variables.scss";
+
+.container-post{
+  gap: 8px;
+}
+
+.containerHome {
+  background: linear-gradient(
+    45deg,
+    rgba(255, 188, 116, 0.5) 0%,
+    rgba(248, 248, 248, 1) 50%,
+    rgba(255, 118, 116, 0.4963235294117647) 100%
+  );
+
+  &__icons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 0;
+
+    .reaction {
+      display: flex;
+      gap: 18px;
+      margin: 0;
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+  &__card {
+    display: flex;
+    flex-direction: column;
+    background-color: $white;
+    border-radius: 20px;
+    width: calc(100% - 20px); /* Restamos 20px para dar espacio a los márgenes */
+    margin: 0 auto; /* Centramos horizontalmente */
+    padding: 20px; 
+    margin-top: 8px;
+    overflow: hidden; 
+
+    &-prof {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      .contain{
+        width: 50px; 
+        height: 50px; 
+        border-radius: 50%; 
+        border: 2px solid transparent; 
+        background: linear-gradient(45deg, $red, $light-pink, $bright-pink, $orange); 
+        padding: 2px; 
+        .usuaria  {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%; 
+            
+          }
+        
+      }
+      
+    }
+    .imageCard {
+      margin-bottom: 10px;
+      height: 280px;
+      width: 100%;
+
+      .usered {
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        object-fit: cover;
+      }
+    }
+    &-likes {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .down {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0px;
+        .reaction {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          img {
+            width: 20px;
+            height: 20px;
+          }
+          span {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+    .containPublication {
+      margin-top: auto; 
+      padding: 10px 0; 
+  
+      .username {
+        font-weight: bold;
+      }
+  
+      .caption {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
